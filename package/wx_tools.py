@@ -21,8 +21,7 @@ class Wx_tools:
         if wx_file == "":
             print(CONFIG_YAML.Colored().red("[!] 未配置wx文件夹"))
             exit(0)
-        self.root_path = wx_file + "/Applet"
-        self.root_path2 = wx_file + "\\Applet"
+        self.root_path = os.path.join(wx_file, "Applet")
         self.hook_thread = None
 
     def remove_file_wx(self):
@@ -132,8 +131,8 @@ class Wx_tools:
             for folder in new_folders:
                 # 获取窗口标题
                 window_text = self._get_window_text()
-                folder_file = "./result/{}".format(window_text)
-                wxapkg_file = self.wx_file_wxapkg(self.root_path2 + '\\' + folder)
+                folder_file = os.path.join(".", "result", window_text)
+                wxapkg_file = self.wx_file_wxapkg(os.path.join(self.root_path, folder))
                 
                 if os.path.isdir(folder_file):
                     print(CONFIG_YAML.Colored().magenta(f"\n[*]《{window_text}》文件已经存在"))
